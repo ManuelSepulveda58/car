@@ -14,8 +14,9 @@
         @foreach ($cars as $car)
             <div class="car-card">
                 <h3>{{ $car->model }}</h3>
-                <p>Marca: {{ $car->brand->name }}</p>
-                <p>Precio: ${{ number_format($car->price, 2) }}</p>
+                <p><strong>Marca:</strong> {{ $car->brand->name }}</p>
+                <p><strong>Precio:</strong> ${{ number_format($car->price, 2) }}</p>
+                <p><strong>Kilometraje:</strong> {{ number_format($car->kilometraje) }} km</p>
             </div>
         @endforeach
     </div>
