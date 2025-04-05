@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\AdminCarController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Car;
@@ -13,3 +13,13 @@ Route::get('/cars', function () {
     
     return view('index', compact('cars'));
 })->name('index');
+
+// Grupo de rutas para administración de autos
+Route::prefix('admin/cars')->name('admin.cars.')->group(function () {
+    Route::get('/', [AdminCarController::class, 'index'])->name('index');
+    Route::get('/create', [AdminCarController::class, 'create'])->name('create');
+    Route::post('/', [AdminCarController::class, 'store'])->name('store');
+    Route::get('/{car}/edit', [AdminCarController::class, 'edit'])->name('edit');
+    Route::put('/{car}', [AdminCarController::class, 'update'])->name('update');
+    Route::delete('/{car}', [AdminCarController::class, 'destroy'])->name('destroy');
+});
