@@ -1,3 +1,19 @@
 npm run build #desarrollar en tiempo real
+
 php artisan serve #Correr Server
+
 php artisan tinker # Tinker
+
+composer install #Instala todas las dependencias de PHP
+
+npm install #Instala las dependencias de Node.js
+
+cp .env.example .env #Copia el archivo de configuración .env.example a .env, que Laravel necesita para saber cómo 
+conectarse a la base de datos, qué modo está usando (local, producción, etc.), y más.
+
+php artisan key:generate #Genera la clave de cifrado de la aplicación
+
+php artisan migrate #Ejecuta las migraciones
+
+npm run dev #Compila los archivos CSS y JS en modo desarrollo
+   
