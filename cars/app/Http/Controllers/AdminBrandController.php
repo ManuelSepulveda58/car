@@ -27,18 +27,26 @@ class AdminBrandController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-public function store(Request $request)
-{
-    $request->validate([
-        'name' => 'required|string|max:255|unique:brands,name',
-    ]);
-
-    \App\Models\Brand::create([
-        'name' => $request->name
-    ]);
-
-    return redirect()->route('admin.brands.index')->with('success', 'Marca creada correctamente.');
-}
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'imagen' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
+        ]);
+    
+        $rutaImagen = null;
+    
+        if ($request->hasFile('imagen')) {
+            $rutaImagen = $request->file('imagen')->store('brands', 'public');
+        }
+    
+        Brand::create([
+            'name' => $request->name,
+            'imagen' => $rutaImagen
+        ]);
+    
+        return redirect()->route('admin.brands.index')->with('success', 'Marca creada correctamente.');
+    }
 
 
     /**
@@ -52,24 +60,44 @@ public function store(Request $request)
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Brand $brand)
     {
-        //
+        return view('admin.brands.edit', compact('brand'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Brand $brand)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'imagen' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
+        ]);
+    
+        $datos = ['name' => $request->name];
+    
+        if ($request->hasFile('imagen')) {
+            // Eliminar imagen anterior si existe
+            if ($brand->imagen && \Storage::disk('public')->exists($brand->imagen)) {
+                \Storage::disk('public')->delete($brand->imagen);
+            }
+    
+            $datos['imagen'] = $request->file('imagen')->store('brands', 'public');
+        }
+    
+        $brand->update($datos);
+    
+        return redirect()->route('admin.brands.index')->with('success', 'Marca actualizada correctamente.');
     }
+    
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Brand $brand)
     {
-        //
+        $brand->delete();
+        return redirect()->route('admin.brands.index')->with('success', 'Marca eliminada correctamente.');
     }
 }

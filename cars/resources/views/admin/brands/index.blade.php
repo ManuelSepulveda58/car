@@ -1,38 +1,48 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h1>Listado de Marcas</h1>
-        <a href="{{ route('admin.brands.create') }}" class="btn btn-primary">
-            Agregar nueva marca
-        </a>
-    </div>
+<div class="container mt-4">
+    <h1 class="mb-4">Listado de Marcas</h1>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    @if($brands->count())
-        <ul class="list-group">
-            @foreach ($brands as $brand)
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <span>{{ $brand->name }}</span>
-                    <div>
-                        <a href="{{ route('admin.brands.edit', $brand) }}" class="btn btn-sm btn-warning me-2">Editar</a>
-                        <form action="{{ route('admin.brands.destroy', $brand) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar esta marca?')">Eliminar</button>
-                        </form>
-                    </div>
-                </li>
-            @endforeach
-        </ul>
+    <div class="d-flex justify-content-end mb-3">
+        <a href="{{ route('admin.brands.create') }}" class="btn btn-success">Agregar nueva marca</a>
+    </div>
 
-        <div class="mt-3">
-            {{ $brands->links() }}
-        </div>
+    @if ($brands->count())
+        <table class="table table-bordered">
+            <thead class="table-light">
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($brands as $brand)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $brand->name }}</td>
+                        <td class="d-flex gap-1">
+                            <a href="{{ route('admin.brands.edit', $brand) }}" class="btn btn-primary btn-sm">Editar</a>
+                            <form action="{{ route('admin.brands.destroy', $brand) }}" method="POST" onsubmit="return confirm('¿Eliminar esta marca?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+
+        {{-- Paginación --}}
+        {{ $brands->links() }}
     @else
-        <p>No hay marcas registradas.</p>
+        <div class="alert alert-info">No hay marcas registradas.</div>
     @endif
+</div>
 @endsection
