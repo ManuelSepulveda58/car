@@ -8,9 +8,11 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <div class="d-flex justify-content-end mb-3">
-        <a href="{{ route('admin.cars.create') }}" class="btn btn-success">Agregar nuevo auto</a>
+    <div class="d-flex justify-content-between mb-3">
+       <a href="{{ route('admin.brands.index') }}" class="btn btn-secondary">Administrar Marcas</a>
+       <a href="{{ route('admin.cars.create') }}" class="btn btn-success">Agregar nuevo auto</a>
     </div>
+
 
     @if ($cars->count())
         <table class="table table-bordered table-hover">

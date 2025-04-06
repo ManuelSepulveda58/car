@@ -1,21 +1,36 @@
 <?php
-use App\Http\Controllers\AdminBrandController;
+
 use App\Http\Controllers\AdminCarController;
+use App\Http\Controllers\AdminBrandController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Car;
+use Illuminate\Http\Request;
 
+// Página principal
 Route::get('/', [PageController::class, 'home'])->name('home');
 
-
+// Catálogo público
 Route::get('/cars', function () {
-    $cars = Car::with('brand') // Carga la relación 'brand' para evitar N+1
-               ->paginate(10); // Paginación de 10 autos por página
-    
+    $cars = Car::with('brand')->paginate(10);
     return view('index', compact('cars'));
 })->name('index');
 
-// Grupo de rutas para administración de autos
+// Mostrar formulario de login
+Route::get('/admin/login', function () {
+    return view('admin.login');
+})->name('admin.login');
+
+Route::post('/admin/login', function (Request $request) {
+    if ($request->password === '1234') {
+        session(['admin_authenticated' => true]);
+        return redirect()->route('admin.cars.index');
+    } else {
+        return back()->with('error', 'Contraseña incorrecta.');
+    }
+})->name('admin.login.attempt');
+
+// Administración de autos
 Route::prefix('admin/cars')->name('admin.cars.')->group(function () {
     Route::get('/', [AdminCarController::class, 'index'])->name('index');
     Route::get('/create', [AdminCarController::class, 'create'])->name('create');
@@ -25,7 +40,7 @@ Route::prefix('admin/cars')->name('admin.cars.')->group(function () {
     Route::delete('/{car}', [AdminCarController::class, 'destroy'])->name('destroy');
 });
 
-// Grupo de rutas para administración de brands
+// (Opcional) administración de marcas si quieres usarla
 Route::prefix('admin/brands')->name('admin.brands.')->group(function () {
     Route::get('/', [AdminBrandController::class, 'index'])->name('index');
     Route::get('/create', [AdminBrandController::class, 'create'])->name('create');

@@ -22,15 +22,7 @@
         </div>
     </div>
 
-    <!-- Botones de administración -->
-    <div class="mb-4 d-flex justify-content-end gap-2">
-        <a href="{{ route('admin.cars.index') }}" class="btn btn-outline-primary">
-            Administrar Autos
-        </a>
-        <a href="{{ route('admin.brands.index') }}" class="btn btn-outline-secondary">
-            Administrar Marcas
-        </a>
-    </div>
+
 
     <!-- Resultados -->
     <div id="results" class="row">
