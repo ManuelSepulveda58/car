@@ -50,4 +50,12 @@
             }
         }
     </script>
+
+    <!-- resources/views/index.blade.php -->
+
+ <a href="{{ route('admin.cars.index') }}" class="btn btn-primary">
+    Ir a administración de autos
+ </a>
+ 
+
 @endsection

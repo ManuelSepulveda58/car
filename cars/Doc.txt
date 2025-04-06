@@ -1,0 +1,3 @@
+npm run build #desarrollar en tiempo real
+php artisan serve #Correr Server
+php artisan tinker # Tinker
