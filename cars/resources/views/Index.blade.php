@@ -2,11 +2,21 @@
 
 @section('content')
     <!-- Filtros -->
-    <div class="filters">
+    <div class="filters mb-4">
         <input type="text" id="modelFilter" placeholder="Modelo (ej: Civic)">
         <input type="number" id="minPrice" placeholder="Precio mínimo">
         <input type="number" id="maxPrice" placeholder="Precio máximo">
         <button onclick="filterCars()">Buscar</button>
+    </div>
+
+    <!-- Botones de navegación -->
+    <div class="mb-4">
+        <a href="{{ route('admin.cars.index') }}" class="btn btn-primary me-2">
+            Ir a administración de autos
+        </a>
+        <a href="{{ route('admin.brands.index') }}" class="btn btn-secondary">
+            Ir a administración de marcas
+        </a>
     </div>
 
     <!-- Resultados -->
@@ -50,12 +60,4 @@
             }
         }
     </script>
-
-    <!-- resources/views/index.blade.php -->
-
- <a href="{{ route('admin.cars.index') }}" class="btn btn-primary">
-    Ir a administración de autos
- </a>
- 
-
 @endsection

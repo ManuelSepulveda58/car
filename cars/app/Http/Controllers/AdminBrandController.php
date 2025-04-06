@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Brand;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -12,7 +12,8 @@ class AdminBrandController extends Controller
      */
     public function index()
     {
-        //
+        $brands = Brand::orderBy('name')->paginate(5);
+        return view('admin.brands.index', compact('brands'));
     }
 
     /**
@@ -20,16 +21,25 @@ class AdminBrandController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.brands.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        //
-    }
+public function store(Request $request)
+{
+    $request->validate([
+        'name' => 'required|string|max:255|unique:brands,name',
+    ]);
+
+    \App\Models\Brand::create([
+        'name' => $request->name
+    ]);
+
+    return redirect()->route('admin.brands.index')->with('success', 'Marca creada correctamente.');
+}
+
 
     /**
      * Display the specified resource.
