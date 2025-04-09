@@ -20,7 +20,7 @@
                     <a class="nav-link" href="{{ route('home') }}">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('index') }}">Autos</a>
+                    <a class="nav-link" href="{{ route('index') }}">Catalogo</a>
                 </li>
                 <li class="nav-item">
                    <a class="nav-link" href="{{ route('admin.login') }}">Administración</a>

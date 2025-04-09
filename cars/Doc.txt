@@ -17,3 +17,4 @@ php artisan migrate #Ejecuta las migraciones
 
 npm run dev #Compila los archivos CSS y JS en modo desarrollo
    
+1# Arreglar barra de busqueda 

@@ -40,7 +40,7 @@ Route::prefix('admin/cars')->name('admin.cars.')->group(function () {
     Route::delete('/{car}', [AdminCarController::class, 'destroy'])->name('destroy');
 });
 
-// (Opcional) administración de marcas si quieres usarla
+// administración de marcas 
 Route::prefix('admin/brands')->name('admin.brands.')->group(function () {
     Route::get('/', [AdminBrandController::class, 'index'])->name('index');
     Route::get('/create', [AdminBrandController::class, 'create'])->name('create');
