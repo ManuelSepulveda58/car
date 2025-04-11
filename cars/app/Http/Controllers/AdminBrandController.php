@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class AdminBrandController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     *  Muestra un listado paginado de marcas.
      */
     public function index()
     {
@@ -17,7 +17,7 @@ class AdminBrandController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Muestra el formulario para crear una nueva marca.
      */
     public function create()
     {
@@ -25,21 +25,24 @@ class AdminBrandController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Guarda una nueva marca en la base de datos.
      */
     public function store(Request $request)
     {
+        // Validación de los campos recibidos
         $request->validate([
             'name' => 'required|string|max:255',
             'imagen' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
         ]);
     
         $rutaImagen = null;
-    
+
+        // Si se subió una imagen, se almacena en el sistema de archivos
         if ($request->hasFile('imagen')) {
             $rutaImagen = $request->file('imagen')->store('brands', 'public');
         }
-    
+
+        // Se crea la marca con el nombre y la ruta de imagen
         Brand::create([
             'name' => $request->name,
             'imagen' => $rutaImagen
@@ -58,7 +61,7 @@ class AdminBrandController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Muestra el formulario para editar una marca existente.
      */
     public function edit(Brand $brand)
     {
@@ -66,17 +69,19 @@ class AdminBrandController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualiza la información de una marca en la base de datos.
      */
     public function update(Request $request, Brand $brand)
     {
+        // Validación de los campos actualizados
         $request->validate([
             'name' => 'required|string|max:255',
             'imagen' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048'
         ]);
     
         $datos = ['name' => $request->name];
-    
+
+        // Si se sube una nueva imagen, se reemplaza la anterior
         if ($request->hasFile('imagen')) {
             // Eliminar imagen anterior si existe
             if ($brand->imagen && \Storage::disk('public')->exists($brand->imagen)) {
@@ -85,7 +90,8 @@ class AdminBrandController extends Controller
     
             $datos['imagen'] = $request->file('imagen')->store('brands', 'public');
         }
-    
+
+        // Actualiza la marca con los nuevos datos
         $brand->update($datos);
     
         return redirect()->route('admin.brands.index')->with('success', 'Marca actualizada correctamente.');
@@ -93,10 +99,11 @@ class AdminBrandController extends Controller
     
 
     /**
-     * Remove the specified resource from storage.
+     * Elimina una marca de la base de datos.
      */
     public function destroy(Brand $brand)
     {
+        // Elimina la marca de la base de datos
         $brand->delete();
         return redirect()->route('admin.brands.index')->with('success', 'Marca eliminada correctamente.');
     }

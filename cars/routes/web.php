@@ -7,20 +7,20 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Car;
 use Illuminate\Http\Request;
 
-// Página principal
+// Página principal de bienvenida
 Route::get('/', [PageController::class, 'home'])->name('home');
 
-// Catálogo público
-Route::get('/cars', function () {
-    $cars = Car::with('brand')->paginate(10);
-    return view('index', compact('cars'));
-})->name('index');
+// Catálogo de autos
+Route::get('/cars', [PageController::class, 'catalog'])->name('index');
+
+
 
 // Mostrar formulario de login
 Route::get('/admin/login', function () {
     return view('admin.login');
 })->name('admin.login');
 
+// Intento de login
 Route::post('/admin/login', function (Request $request) {
     if ($request->password === '1234') {
         session(['admin_authenticated' => true]);

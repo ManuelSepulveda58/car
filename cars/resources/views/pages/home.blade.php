@@ -1,7 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+
+
 <style>
+/**
+ * Este bloque define estilos personalizados para la página de bienvenida.
+ */
     body {
         background: linear-gradient(to right, #f0f4f8, #d9e2ec);
     }
@@ -41,11 +46,13 @@
     }
 </style>
 
+<!--Contiene el contenido principal-->
 <div class="container home-container">
-    <h1>Bienvenido a <span class="text-primary">CarDealer</span></h1>
+    <h1>Bienvenido a <span class="text-primary">CarDealer</span></h1>   <!--Titulo-->
     <p>Explora nuestro catálogo de autos modernos</p>
-    <a href="{{ route('index') }}" class="btn btn-primary btn-lg">Ver Catálogo</a>
+    <a href="{{ route('index') }}" class="btn btn-primary btn-lg">Ver Catálogo</a> <!--Boton Catalogo-->
     <div class="text-center mt-5">
+        <!--Imagen-->
         <img src="{{ asset('images/catalogo.jpg') }}" alt="Catálogo de autos" class="img-fluid rounded shadow" style="max-height: 400px;">
     </div>
 </div>

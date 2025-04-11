@@ -15,20 +15,20 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         // Middleware para API
         $middleware->api([
-            HandleCors::class, // CORS nativo (ya incluido en Laravel 12)
+            HandleCors::class, // CORS nativo 
             \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\ForceJsonResponse::class,
         ]);
 
-        // Middleware para web (si aplica)
+        // Middleware para web 
         $middleware->web([
             \Illuminate\Cookie\Middleware\EncryptCookies::class,
             \Illuminate\Session\Middleware\StartSession::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        // Manejo personalizado de errores (ejemplo)
+        // Manejo personalizado de errores 
         $exceptions->shouldRenderJsonWhen(function ($request) {
             return $request->is('api/*');
         });

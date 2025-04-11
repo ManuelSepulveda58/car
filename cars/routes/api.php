@@ -1,5 +1,7 @@
 <?php
 
+// API routes managed from CustomApiRoutes.php
+
 use Illuminate\Support\Facades\Route;
 
 
