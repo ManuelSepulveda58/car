@@ -8,7 +8,7 @@
  * Este bloque define estilos personalizados para la página de bienvenida.
  */
     body {
-        background: linear-gradient(to right, #f0f4f8, #d9e2ec);
+        background: linear-gradient(to right,rgb(98, 171, 244),rgb(233, 241, 234));
     }
 
     .home-container {
@@ -22,12 +22,12 @@
 
     .home-container h1 {
         font-size: 3rem;
-        color: #2c3e50;
+        color:rgb(0, 0, 0);
     }
 
     .home-container p {
         font-size: 1.2rem;
-        color: #34495e;
+        color:rgb(4, 10, 55);
         margin-bottom: 2rem;
     }
 

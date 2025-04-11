@@ -8,6 +8,15 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
+ <style>
+    body {
+        background: linear-gradient(135deg,rgb(157, 241, 232),rgb(64, 131, 248));
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+ </style>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom px-4 py-2">
     <div class="container-fluid">
         <a class="navbar-brand fw-bold" href="{{ route('home') }}">CarDealer</a>
