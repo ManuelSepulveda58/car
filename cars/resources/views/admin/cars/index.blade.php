@@ -9,63 +9,51 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
-    <!-- Botones para ir a la sección de marcas o agregar un nuevo auto -->
+    <!-- Botones para ir a la sección de marcas o agregar un nuevo auto o Salir -->
     <div class="d-flex justify-content-between mb-3">
         <a href="{{ route('admin.brands.index') }}" class="btn btn-secondary">Administrar Marcas</a>
         <a href="{{ route('admin.cars.create') }}" class="btn btn-success">Agregar nuevo auto</a>
+        <a href="{{ route('home') }}" class="btn btn-secondary">Salir de administración</a>
     </div>
 
     <!-- Verificamos si hay autos registrados -->
     @if ($cars->count())
-        <table class="table table-bordered table-hover">
-            <thead class="table-light">
-                <tr>
-                    <th>#</th>
-                    <th>Modelo</th>
-                    <th>Marca</th>
-                    <th>Precio</th>
-                    <th>Kilometraje</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Recorremos los autos disponibles -->
-                @foreach ($cars as $car)
-                    <tr>
-                        <!-- Número del auto  -->
-                        <td>{{ $loop->iteration }}</td>
-
-                        <!-- Modelo del auto -->
-                        <td>{{ $car->model }}</td>
-
-                        <!-- Nombre de la marca asociada -->
-                        <td>{{ $car->brand->name }}</td>
-
-                        <!-- Precio formateado -->
-                        <td>${{ number_format($car->price, 2) }}</td>
-
-                        <!-- Kilometraje formateado con "km" -->
-                        <td>{{ number_format($car->kilometraje) }} km</td>
-
-                        <!-- Botones de acción: Editar y Eliminar -->
-                        <td>
-                            <!-- Editar auto -->
-                            <a href="{{ route('admin.cars.edit', $car) }}" class="btn btn-primary btn-sm">Editar✏️</a>
-
-                            <!-- Eliminar auto -->
-                            <form action="{{ route('admin.cars.destroy', $car) }}" method="POST" class="d-inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm"
-                                        onclick="return confirm('¿Eliminar este auto?')">
-                                    Eliminar⚠️
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+    <table class="table table-striped table-hover align-middle shadow-sm rounded">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Modelo</th>
+            <th scope="col">Marca</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Kilometraje</th>
+            <th scope="col">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($cars as $car)
+            <tr>
+                <th scope="row">{{ $loop->iteration }}</th>
+                <td>{{ $car->model }}</td>
+                <td>{{ $car->brand->name }}</td>
+                <td>${{ number_format($car->price, 2) }}</td>
+                <td>{{ number_format($car->kilometraje) }} km</td>
+                <td>
+                    <a href="{{ route('admin.cars.edit', $car) }}" class="btn btn-sm btn-outline-primary me-1">
+                        ✏️ Editar
+                    </a>
+                    <form action="{{ route('admin.cars.destroy', $car) }}" method="POST" class="d-inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-sm btn-outline-danger"
+                                onclick="return confirm('¿Eliminar este auto?')">
+                            ⚠️ Eliminar
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        @endforeach
+    </tbody>
+</table>
 
         <!-- Paginación -->
         {{ $cars->links() }}

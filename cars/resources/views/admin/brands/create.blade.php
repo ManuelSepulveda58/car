@@ -20,8 +20,9 @@
             <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*">
         </div>
 
-        <!-- Botón para guardar la marca -->
+        <!-- Botón para guardar la marca y Cancelar-->
         <button type="submit" class="btn btn-success">Guardar</button>
+        <a href="{{ route('admin.brands.index') }}" class="btn btn-danger ms-2">Cancelar</a>
     </form>
 </div>
 @endsection

@@ -16,5 +16,5 @@ php artisan key:generate #Genera la clave de cifrado de la aplicación
 php artisan migrate #Ejecuta las migraciones
 
 npm run dev #Compila los archivos CSS y JS en modo desarrollo
-   
-1# Arreglar barra de busqueda 
+
+php artisan vendor:publish --tag=laravel-pagination #crea paginasion 

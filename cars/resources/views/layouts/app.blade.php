@@ -10,7 +10,7 @@
 <body>
  <style>
     body {
-        background: linear-gradient(135deg,rgb(157, 241, 232),rgb(64, 131, 248));
+        background: linear-gradient(135deg,rgb(149, 199, 240),rgb(183, 196, 215));
         background-attachment: fixed;
         background-repeat: no-repeat;
         background-size: cover;
