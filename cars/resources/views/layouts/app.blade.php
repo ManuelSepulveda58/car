@@ -26,13 +26,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home') }}">Inicio</a>
+                    <a class="nav-link" href="{{ route('home') }}">Inicio ۞</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('index') }}">Catalogo</a>
+                    <a class="nav-link" href="{{ route('index') }}">Catalogo 🌐</a>
                 </li>
                 <li class="nav-item">
-                   <a class="nav-link" href="{{ route('admin.login') }}">Administración</a>
+                   <a class="nav-link" href="{{ route('admin.login') }}">Administración 🛠️</a>
                 </li>
             </ul>
         </div>

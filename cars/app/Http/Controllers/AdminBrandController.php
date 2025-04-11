@@ -104,7 +104,12 @@ class AdminBrandController extends Controller
     public function destroy(Brand $brand)
     {
         // Elimina la marca de la base de datos
-        $brand->delete();
-        return redirect()->route('admin.brands.index')->with('success', 'Marca eliminada correctamente.');
+        try {
+            $brand->delete();
+            return redirect()->route('admin.brands.index')->with('success', 'Marca eliminada correctamente.');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('admin.brands.index')
+                ->with('error', 'No se puede eliminar la marca porque está asociada a uno o más autos, Elimina primero los autos');
+        }
     }
 }

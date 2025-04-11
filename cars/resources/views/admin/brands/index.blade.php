@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container mt-5">
-    <h1 class="mb-4 text-center fw-bold display-5 text-primary">Gestión de Marcas</h1>
+    <h1 class="mb-4 text-center fw-bold display-5 text">Gestión de Marcas</h1>
 
     <!-- Alerta de éxito -->
     @if(session('success'))
@@ -12,10 +12,16 @@
         </div>
     @endif
 
+    @if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+    @endif
+
     <!-- Botón para agregar una nueva marca y Regresar-->
     <div class="d-flex justify-content-between mb-3">
-        <a href="{{ route('admin.cars.index') }}" class="btn btn-outline-secondary">Regresar a autos</a>      
-        <a href="{{ route('admin.brands.create') }}" class="btn btn-outline-primary">Agregar Marca</a>  
+        <a href="{{ route('admin.cars.index') }}" class="btn btn-secondary">Regresar a autos</a>      
+        <a href="{{ route('admin.brands.create') }}" class="btn btn-primary">Agregar Marca</a>  
     </div>
 
     <!-- Tabla de marcas -->
@@ -41,14 +47,14 @@
                             <!-- Acciones de edición y eliminación -->
                             <td class="d-flex justify-content-center gap-2">
                                 <a href="{{ route('admin.brands.edit', $brand) }}" class="btn btn-sm btn-outline-secondary">
-                                    <i class="bi bi-pencil-square"></i> Editar
+                                    <i class="bi bi-pencil-square"></i> Editar ❀
                                 </a>
 
-                                <form action="{{ route('admin.brands.destroy', $brand) }}" method="POST" onsubmit="return confirm('¿Eliminar esta marca?')" class="d-inline">
+                                <form action="{{ route('admin.brands.destroy', $brand) }}" method="POST" onsubmit="return confirm('¿Estas Seguro En Eliminar esta marca ☠︎︎ ?')" class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-outline-danger">
-                                        <i class="bi bi-trash"></i> Eliminar
+                                        <i class="bi bi-trash"></i> Eliminar ☠︎︎
                                     </button>
                                 </form>
                             </td>

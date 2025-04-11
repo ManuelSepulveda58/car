@@ -45,7 +45,7 @@
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-sm btn-outline-danger"
-                                onclick="return confirm('¿Eliminar este auto?')">
+                                onclick="return confirm('¿Seguro Que Quieres SEliminar este auto?')">
                             ⚠️ Eliminar
                         </button>
                     </form>

@@ -28,8 +28,9 @@
             </div>
         @endif
 
-        <!-- Botón para enviar el formulario y actualizar la marca -->
+        <!-- Botón para enviar/actualizar y Cancelar -->
         <button type="submit" class="btn btn-primary">Actualizar</button>
+        <a href="{{ route('admin.brands.index') }}" class="btn btn-danger ms-2">Cancelar</a> 
     </form>
 </div>
 @endsection
