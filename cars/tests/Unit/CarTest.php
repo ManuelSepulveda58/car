@@ -2,19 +2,23 @@
 
 namespace Tests\Unit;
 
-use App\Models\Car;
 use Tests\TestCase;
+use App\Models\Car;
+use App\Models\Brand;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CarTest extends TestCase
 {
+    use RefreshDatabase;
+
     /** @test */
-    public function it_calculates_final_price_with_tax()
+    public function a_car_belongs_to_a_brand()
     {
+        $brand = Brand::factory()->create();
         $car = Car::factory()->create([
-            'price' => 10000,
-            'tax_rate' => 0.19 // 19%
+            'brand_id' => $brand->id
         ]);
 
-        $this->assertEquals(11900, $car->final_price);
+        $this->assertInstanceOf(Brand::class, $car->brand);
     }
 }

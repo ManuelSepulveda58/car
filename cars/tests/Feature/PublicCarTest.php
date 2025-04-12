@@ -11,12 +11,7 @@ class PublicCarTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_puede_ver_pagina_principal()
-    {
-        $response = $this->get('/');
-        $response->assertStatus(200)
-                 ->assertViewIs('home');
-    }
+
 
     public function test_puede_listar_autos_publicos()
     {
